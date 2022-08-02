@@ -1,0 +1,10 @@
+rpm -q ansible ( To check ansible is available and setup is done on system)
+
+IF NOT 
+
+yum/dnf indtall ansible (Not From ISO / It will get downloaded from epel release (internet) )
+
+** yum install epel-next-release **
+
+** IF yum get stuck Plese check INternet Connectivity **
+
