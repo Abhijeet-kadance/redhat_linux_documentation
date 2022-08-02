@@ -1,6 +1,6 @@
 # YUM REPOLIST 
 
-> Step 1> Connect ISO IN Virtual Machine
+> Step 1> Connect ISO in Virtual Machine
 
 > Step 2> Mount the repos from  ISO file to Local Repository Directory
 
