@@ -76,3 +76,41 @@ The X-Frame-Options in used as HTTP response header. This prevents your site con
 
     // Add the Below Line the Configuration File of Apache
     Header set X-Frame-Options SAMEORIGIN
+
+
+
+RewriteEngine on
+
+RewriteCond %{THE_REQUEST} !^(POST|GET)\ /.*\ HTTP/1\.1$
+
+RewriteRule .* - [F]
+
+    
+Header unset Server
+
+Header always unset "X-Powered-By"
+
+Header unset "X-Powered-By"
+
+
+#BELOW HEADER ADDED FOR INTERNET EXPLORER SECURITY
+
+Header set X-Download-Option "noopen"
+
+
+
+
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_METHOD} !^(GET|POST)
+
+RewriteRule .* - [R=405,L]
+
+
+    <Location />
+            <LimitExcept GET POST>
+            order deny,allow
+            deny from all
+            </LimitExcept>
+    </Location>
