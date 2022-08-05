@@ -29,4 +29,25 @@
     ServerSignature Off
 
 
-**
+**Add X-XSS Protection for Server to securing form XSS Attacks By adding the Lines**
+> By default / or By requirement the X-XSS Protection can be or be set to 0. Setting this Flag to 0 disable the protection to XSS Attacks. WE have to set the flag to 1.
+
+
+    // Add below Line in the Apache  conf file to do so
+    // Note: Please Add these Lines Outside the VirtualHost scope
+    Header set X-XSS-Protection 1;mode=block
+
+---
+**X-Content-Type-OPtions Header**
+
+---
+
+The X-Content-Type-Options header is used to protect against MIME sniffing vulnerabilities. These vulnerabilities can occur when a website allows users to upload content to a website however the user disguises a particular file type as something else. This can give them the opportunity to perform cross-site scripting and compromise the website.
+
+
+Header set X-Content-Type-Options nosniff
+
+Header set Content-Security-Policy "frame-ancestors 'none';"
+
+
+Header set X-Frame-Options SAMEORIGIN
