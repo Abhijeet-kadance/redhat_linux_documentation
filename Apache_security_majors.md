@@ -49,11 +49,17 @@ Unfortunately, the X-Content-Type-Options: nosniff header does not protect again
     // Add the Below Line the Configuration File of Apache
     Header set X-Content-Type-Options nosniff
 
+---
+**Content-Security-Policy Header**
 
-**
+---
+Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft, to site defacement, to malware distribution. 
+
+    // Add the below Line in you apache Configuration File
+    Header set Content-Security-Policy "frame-ancestors 'none';"
 
 
-Header set Content-Security-Policy "frame-ancestors 'none';"
+**X-Frame-Options Header**
 
-
-Header set X-Frame-Options SAMEORIGIN
+    // Add the Below Line the Configuration File of Apache
+    Header set X-Frame-Options SAMEORIGIN
