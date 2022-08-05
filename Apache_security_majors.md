@@ -58,8 +58,21 @@ Content Security Policy (CSP) is an added layer of security that helps to detect
     // Add the below Line in you apache Configuration File
     Header set Content-Security-Policy "frame-ancestors 'none';"
 
-
+---
 **X-Frame-Options Header**
+
+---
+The X-Frame-Options in used as HTTP response header. This prevents your site content embedded into other sites. Based on this value a browser allowed other sites to open web page in iframe. It also secure your Apache web server from clickjacking attack.
+
+    There are three options available to set with X-Frame-Options:
+
+    ‘SAMEORIGIN’ – With this setting, you can embed pages on same origin. For example, add iframe of a page to site itself.
+
+    ‘ALLOW-FROM uri – Use this setting to allow specific origin (website/domain) to embed pages of your site in iframe.
+
+    ‘DENY – This will not allow any website to embed your site pages in an iframe. 
+
+    
 
     // Add the Below Line the Configuration File of Apache
     Header set X-Frame-Options SAMEORIGIN
