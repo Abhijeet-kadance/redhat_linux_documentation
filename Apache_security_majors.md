@@ -38,14 +38,20 @@
     Header set X-XSS-Protection 1;mode=block
 
 ---
-**X-Content-Type-OPtions Header**
+**X-Content-Type-Options Header**
 
 ---
 
 The X-Content-Type-Options header is used to protect against MIME sniffing vulnerabilities. These vulnerabilities can occur when a website allows users to upload content to a website however the user disguises a particular file type as something else. This can give them the opportunity to perform cross-site scripting and compromise the website.
 
+Unfortunately, the X-Content-Type-Options: nosniff header does not protect against all sniffing-related vulnerabilities. 
 
-Header set X-Content-Type-Options nosniff
+    // Add the Below Line the Configuration File of Apache
+    Header set X-Content-Type-Options nosniff
+
+
+**
+
 
 Header set Content-Security-Policy "frame-ancestors 'none';"
 
