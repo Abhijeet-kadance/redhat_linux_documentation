@@ -78,6 +78,7 @@ The X-Frame-Options in used as HTTP response header. This prevents your site con
     Header set X-Frame-Options SAMEORIGIN
 
 
+-----
 
 RewriteEngine on
 
@@ -85,20 +86,22 @@ RewriteCond %{THE_REQUEST} !^(POST|GET)\ /.*\ HTTP/1\.1$
 
 RewriteRule .* - [F]
 
-    
+---
+
+
 Header unset Server
 
 Header always unset "X-Powered-By"
 
 Header unset "X-Powered-By"
 
-
+---
 #BELOW HEADER ADDED FOR INTERNET EXPLORER SECURITY
 
 Header set X-Download-Option "noopen"
 
 
-
+---
 
 
 RewriteEngine On
@@ -107,6 +110,7 @@ RewriteCond %{REQUEST_METHOD} !^(GET|POST)
 
 RewriteRule .* - [R=405,L]
 
+---
 
     <Location />
             <LimitExcept GET POST>
@@ -114,3 +118,18 @@ RewriteRule .* - [R=405,L]
             deny from all
             </LimitExcept>
     </Location>
+
+---
+
+## Breach Attack ##
+
+    SetOutputFilter DEFLATE
+        BrowserMatch ^Mozilla/4 gzip-only-text/html
+        BrowserMatch ^Mozilla/4\.0[678] no-gzip
+        BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+        SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|zip|gz|tgz|htc)$ no-gzip dont-vary
+        # BREACH migitation
+        SetEnvIfNoCase Referer .* self_referer=no
+        SetEnvIfNoCase Referer ^https://www\.example\.org/ self_referer=yes
+        SetEnvIf self_referer ^no$ no-gzip
+        Header append Vary User-Agent env=!dont-vary
