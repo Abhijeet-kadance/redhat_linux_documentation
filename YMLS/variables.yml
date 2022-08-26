@@ -1,0 +1,9 @@
+- hosts: all
+  vars:
+        x:5
+        y:6
+  tasks:
+  - debug:
+        var: x
+  - debug:
+        msg: "this is my data {{ x }} and {{ y }}"

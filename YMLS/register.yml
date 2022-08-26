@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+  - command: "date"
+    register: x
+  - debug:
+        var: x

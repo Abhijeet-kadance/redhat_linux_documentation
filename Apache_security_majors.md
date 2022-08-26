@@ -121,6 +121,13 @@ RewriteRule .* - [R=405,L]
 
 ---
 
+## Lucky 13 Attack ##
+
+### For Django Based Application ###
+https://www.djangoproject.com/weblog/2013/aug/06/breach-and-django/
+
+https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
+
 ## Breach Attack ##
 
     SetOutputFilter DEFLATE
@@ -133,3 +140,11 @@ RewriteRule .* - [R=405,L]
         SetEnvIfNoCase Referer ^https://www\.example\.org/ self_referer=yes
         SetEnvIf self_referer ^no$ no-gzip
         Header append Vary User-Agent env=!dont-vary
+
+## Http Only & Secure Flags ##
+
+> Add These Files To apache.conf file
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+#For secure flag and HTTP only
+Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure;SameSite=None

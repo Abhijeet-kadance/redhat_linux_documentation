@@ -1,0 +1,26 @@
+- hosts: all
+  vars:
+    p: "httpd"
+  tasks:
+  - name: "Installing http package on Managed Nodes"
+    package:
+      name: "{{ p }}"
+      state: present
+    register: x
+  - debug:
+      var: x
+  - name: "Copying the filed to Document root of the server"
+    copy:
+      dest: "/var/www/html"
+      src: "/var/www/html/web.html"
+  - name: "Starting Httpd Service"
+    service:
+      name: "{{ p }}"
+      state: started
+      enabled: yes
+  - name: "Adding Firewall Rules"
+    firewalld:
+      immediate: yes
+      port: 80/tcp
+      state: enabled
+      permanent: yes
