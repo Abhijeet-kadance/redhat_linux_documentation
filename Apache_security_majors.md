@@ -2,7 +2,10 @@
 ## Security Http Header Settings ##
 ---
 
+---
 **Hide Server Name in Http Header**
+
+---
 > This is Required to hide the http header for ex.(Apache) from http header that would actually hide the Server Used in your Production
 
     //Install the lib apache modsecurity settings for ubuntu apache2 server
@@ -20,16 +23,20 @@
         SecServerSignature "None"
     </IfModule>
 
-
+---
 **Hide Web server Version From Http header**
+
+---
 > This is required toi hide the version used of the web server in the http header for security from any emtity who fing the information useful to Trespass the web server
 
     // Add these Lines in the apache Conf file to hide the version of web server used
     ServerTokens Prod
     ServerSignature Off
 
-
+---
 **Add X-XSS Protection for Server to securing form XSS Attacks By adding the Lines**
+
+---
 > By default / or By requirement the X-XSS Protection can be or be set to 0. Setting this Flag to 0 disable the protection to XSS Attacks. WE have to set the flag to 1.
 
 
@@ -78,32 +85,42 @@ The X-Frame-Options in used as HTTP response header. This prevents your site con
     Header set X-Frame-Options SAMEORIGIN
 
 
------
+---
+**Disable the HTTP OPTIONS Method in Apache**
 
+---
 RewriteEngine on
 
 RewriteCond %{THE_REQUEST} !^(POST|GET)\ /.*\ HTTP/1\.1$
 
 RewriteRule .* - [F]
 
+
 ---
+**Remove Unwanted X-Powered-By header from Apache Server**
 
-
+---
 Header unset Server
 
 Header always unset "X-Powered-By"
 
 Header unset "X-Powered-By"
 
+
 ---
-#BELOW HEADER ADDED FOR INTERNET EXPLORER SECURITY
+**BELOW HEADER ADDED FOR INTERNET EXPLORER SECURITY**
+
+---
+
+The X-Download-Options HTTP header has only one option: X-Download-Options: noopen. This is for Internet Explorer from version 8 on to instruct the browser not to open a download directly in the browser but instead to provide only the �Save� option. The user has to first save it and then open it in an application
 
 Header set X-Download-Option "noopen"
 
 
 ---
+**Apache serer Security header to be added for request method and redirect to 405**
 
-
+---
 RewriteEngine On
 
 RewriteCond %{REQUEST_METHOD} !^(GET|POST)
@@ -145,6 +162,6 @@ https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
 
 > Add These Files To apache.conf file
 
-# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
-#For secure flag and HTTP only
-Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure;SameSite=None
+    # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+    #For secure flag and HTTP only
+    Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure;SameSite=None
